@@ -1,0 +1,4 @@
+{
+  "browserslist": ["> 1%"],
+  "extends": ["accessibility", "progressive-web-apps"]
+}

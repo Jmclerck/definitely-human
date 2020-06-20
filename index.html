@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Podcasts by Definitely Human." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Definitely Human</title>
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+    <link rel="canonical" href="https://definitely-human.jmclerck.now.sh" />
+    <link rel="manifest" href="/icons/site.webmanifest" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#2196f3" />
+    <style>
+      @keyframes float {
+        from {
+          transform: rotate(0deg) translate(-5px) rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg) translate(-5px) rotate(-360deg);
+        }
+      }
+      :root {
+        --color-primary: #f0f0f0;
+        --color-secondary: #263238;
+        --color-outline: #dc5742;
+        --color-down: #251720;
+        --color-iwgbrp: #dbcc83;
+        --color-mars-corp: #574645;
+        --color-pax-fortuna: #7a582f;
+        --color-the-bunker: #272722;
+        --color-the-infinite-bad: #527e86;
+        --color-the-monster-hunters: #65253c;
+      }
+      :focus {
+        outline: none
+      }
+      body {
+        background-color: var(--color-primary);
+        color: var(--color-secondary);
+        font-family: system-ui;
+      }
+      h1 {
+        text-align: center;
+      }
+      .podcasts {
+        display: grid;
+        display: -ms-grid;
+        gap: 0 5rem;
+        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+        list-style: none;
+      }
+      .podcast:hover .bubble,
+      .podcast:hover .title {
+        transition-duration: 0.15s;
+        transition-property: color, filter;
+        transition-timing-function: linear;
+      }
+      .podcast a {
+        color: unset;
+        text-decoration: none;
+      }
+      .podcast a:visited {
+        color: unset;
+      }
+      .podcast .bubble {
+        border-radius: 12.5%;
+        display: block;
+        height: 20rem;
+        overflow: hidden;
+        margin: 0 auto;
+        transition-duration: 0.15s;
+        transition-property: filter;
+        transition-timing-function: linear;
+        transform: translate(-5px);
+        width: 20rem;
+      }
+      .podcast .title {
+        font-size: 0.78em;
+        font-weight: 500;
+        letter-spacing: 0.3em;
+        margin: 2rem auto;
+        text-align: center;
+        text-transform: uppercase;
+        transition-duration: 0.15s;
+        transition-property: color;
+        transition-timing-function: linear;
+        width: 15rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-primary: #263238;
+          --color-secondary: #f0f0f0;
+          --color-outline: #68c5ab;
+        }
+        :focus {
+          outline-color: var(--color-outline);
+        }
+        body {
+          background-color: var(--color-primary);
+        }
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .podcast:hover .bubble {
+          animation-delay: 0s;
+          animation-duration: 15s;
+          animation-iteration-count: infinite;
+          animation-name: float;
+          animation-play-state: running;
+          animation-timing-function: linear;
+          will-change: transform;
+        }
+        .podcast:nth-child(even) .bubble {
+          animation-direction: normal;
+        }
+        .podcast:nth-child(odd) .bubble {
+          animation-direction: reverse;
+        }
+      }
+    </style>
+      
+    <style>
+      footer {
+        grid-column: span 3;
+      }
+      svg {
+        color: inherit;
+        fill: currentColor;
+        height: 1.5rem;
+      }
+      .copyright {
+        text-align: center;
+      }
+      .socials {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+      }
+      .social {
+        flex: 1;
+        flex-grow: 0;
+        margin: 0 1rem;
+      }
+      .social a {
+        color: var(--color-secondary);
+        display: block;
+        font-size: 0rem;
+      }
+      .social a:hover,
+      .social a:focus {
+        color: var(--color-outline);
+      }
+      .social a:hover svg,
+      .social a:focus svg {
+        filter: drop-shadow(0 0 0.5rem var(--color-outline));
+        will-change: filter;
+      }
+      [data-podcast-title="down"]:focus-within .bubble,
+      [data-podcast-title="down"]:hover .bubble {
+        filter: drop-shadow(0.5rem 0.5rem 0.5rem var(--color-down));
+        will-change: filter;
+      }
+      [data-podcast-title="down"]:focus-within .title,
+      [data-podcast-title="down"]:hover .title {
+        color: var(--color-down);
+      }
+      [data-podcast-title="iwgbrp"]:focus-within .bubble,
+      [data-podcast-title="iwgbrp"]:hover .bubble {
+        filter: drop-shadow(0.5rem 0.5rem 0.5rem var(--color-iwgbrp));
+        will-change: filter;
+      }
+      [data-podcast-title="iwgbrp"]:focus-within .title,
+      [data-podcast-title="iwgbrp"]:hover .title {
+        color: var(--color-iwgbrp);
+      }
+      [data-podcast-title="the-bunker"]:focus-within .bubble,
+      [data-podcast-title="the-bunker"]:hover .bubble {
+        filter: drop-shadow(0.5rem 0.5rem 0.5rem var(--color-the-bunker));
+        will-change: filter;
+      }
+      [data-podcast-title="the-bunker"]:focus-within .title,
+      [data-podcast-title="the-bunker"]:hover .title {
+        color: var(--color-the-bunker);
+      }
+      [data-podcast-title="the-infinite-bad"]:focus-within .bubble,
+      [data-podcast-title="the-infinite-bad"]:hover .bubble {
+        filter: drop-shadow(0.5rem 0.5rem 0.5rem var(--color-the-infinite-bad));
+        will-change: filter;
+      }
+      [data-podcast-title="the-infinite-bad"]:focus-within .title,
+      [data-podcast-title="the-infinite-bad"]:hover .title {
+        color: var(--color-the-infinite-bad);
+      }
+      [data-podcast-title="mars-corp"]:focus-within .bubble,
+      [data-podcast-title="mars-corp"]:hover .bubble {
+        filter: drop-shadow(0.5rem 0.5rem 0.5rem var(--color-mars-corp));
+        will-change: filter;
+      }
+      [data-podcast-title="mars-corp"]:focus-within .title,
+      [data-podcast-title="mars-corp"]:hover .title {
+        color: var(--color-mars-corp);
+      }
+      [data-podcast-title="the-monster-hunters"]:focus-within .bubble,
+      [data-podcast-title="the-monster-hunters"]:hover .bubble {
+        filter: drop-shadow(0.5rem 0.5rem 0.5rem var(--color-the-monster-hunters));
+        will-change: filter;
+      }
+      [data-podcast-title="the-monster-hunters"]:focus-within .title,
+      [data-podcast-title="the-monster-hunters"]:hover .title {
+        color: var(--color-the-monster-hunters);
+      }
+      [data-podcast-title="pax-fortuna"]:focus-within .bubble,
+      [data-podcast-title="pax-fortuna"]:hover .bubble {
+        filter: drop-shadow(0.5rem 0.5rem 0.5rem var(--color-pax-fortuna));
+        will-change: filter;
+      }
+      [data-podcast-title="pax-fortuna"]:focus-within .title,
+      [data-podcast-title="pax-fortuna"]:hover .title {
+        color: var(--color-pax-fortuna);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Definitely Human</h1>
+      </header>
+      <ul class="podcasts">
+        <li class="podcast" data-podcast-title="iwgbrp">
+          <a href="/iwgbrp">
+            <picture class="bubble">
+              <source type="image/webp" srcset="images/iwgbrp.webp" />
+              <img
+                loading="lazy"
+                height="320"
+                width="320"
+                srcset="images/iwgbrp-320w.jpeg, images/iwgbrp-640w.jpeg 2x, images/iwgbrp-960w.jpeg 3x"
+                src="images/iwgbrp-320w.jpeg"
+                alt="The International Worldwide Global Biscuit Review Podcast Cover Art"
+              />
+            </picture>
+            <p class="title">
+              The International Worldwide Global Biscuit Review Podcast
+            </p>
+          </a>
+        </li>
+        <li class="podcast" data-podcast-title="the-bunker">
+          <a href="/the-bunker">
+            <picture class="bubble">
+              <source type="image/webp" srcset="images/the-bunker.webp" />
+              <img
+                loading="lazy"
+                height="320"
+                width="320"
+                srcset="images/the-bunker-320w.jpeg, images/the-bunker-640w.jpeg 2x, images/the-bunker-960w.jpeg 3x"
+                src="images/the-bunker-320w.jpeg"
+                alt="The Bunker Podcast Cover Art"
+              />
+            </picture>
+            <p class="title">The Bunker</p>
+          </a>
+        </li>
+        <li class="podcast" data-podcast-title="the-infinite-bad">
+          <a href="/the-infinite-bad">
+            <picture class="bubble">
+              <source type="image/webp" srcset="images/the-infinite-bad.webp" />
+              <img
+                loading="lazy"
+                height="320"
+                width="320"
+                srcset="
+                  images/the-infinite-bad-320w.jpeg,
+                  images/the-infinite-bad-640w.jpeg 2x,
+                  images/the-infinite-bad-960w.jpeg 3x
+                "
+                src="images/the-infinite-bad-320w.jpeg"
+                alt="The Infinite Bad Podcast Cover Art"
+              />
+            </picture>
+            <p class="title">The Infinite Bad</p>
+          </a>
+        </li>
+        <li class="podcast" data-podcast-title="mars-corp">
+          <a href="/mars-corp">
+            <picture class="bubble">
+              <source type="image/webp" srcset="images/mars-corp.webp" />
+              <img
+                loading="lazy"
+                height="320"
+                width="320"
+                srcset="images/mars-corp-320w.jpeg, images/mars-corp-640w.jpeg 2x, images/mars-corp-960w.jpeg 3x"
+                src="images/mars-corp-320w.jpeg"
+                alt="Mars Corp Podcast Cover Art"
+              />
+            </picture>
+            <p class="title">Mars Corp</p>
+          </a>
+        </li>
+        <li class="podcast" data-podcast-title="the-monster-hunters">
+          <a href="/the-monster-hunters">
+            <picture class="bubble">
+              <source type="image/webp" srcset="images/the-monster-hunters.webp" />
+              <img
+                loading="lazy"
+                height="320"
+                width="320"
+                srcset="
+                  images/the-monster-hunters-320w.jpeg,
+                  images/the-monster-hunters-640w.jpeg 2x,
+                  images/the-monster-hunters-960w.jpeg 3x
+                "
+                src="images/the-monster-hunters-320w.jpeg"
+                alt="The Monster Hunters Podcast Cover Art"
+              />
+            </picture>
+            <p class="title">The Monster Hunters</p>
+          </a>
+        </li>
+        <li class="podcast" data-podcast-title="pax-fortuna">
+          <a href="/pax-fortuna">
+            <picture class="bubble">
+              <source type="image/webp" srcset="images/pax-fortuna.webp" />
+              <img
+                loading="lazy"
+                height="320"
+                width="320"
+                srcset="images/pax-fortuna-320w.jpeg, images/pax-fortuna-640w.jpeg 2x, images/pax-fortuna-960w.jpeg 3x"
+                src="images/pax-fortuna-320w.jpeg"
+                alt="Pax Fortuna Podcast Cover Art"
+              />
+            </picture>
+            <p class="title">Pax Fortuna</p>
+          </a>
+        </li>
+        <li class="podcast" data-podcast-title="down">
+          <a href="/down">
+            <picture class="bubble">
+              <source type="image/webp" srcset="images/down.webp" />
+              <img
+                loading="lazy"
+                height="320"
+                width="320"
+                srcset="images/down-320w.jpeg, images/down-640w.jpeg 2x, images/down-960w.jpeg 3x"
+                src="images/down-320w.jpeg"
+                alt="Down Podcast Cover Art"
+              />
+            </picture>
+            <p class="title">Down</p>
+          </a>
+        </li>
+      </ul>
+    </main>
+    <footer>
+      <ul class="socials">
+        <li class="social">
+          <a href="https://patreon.com/definitelyhuman" rel="noopener noreferrer" target="_blank" title="patreon">
+            Patreon page for Definitely Human
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+              <path
+                fill="currentColor"
+                d="M10.53049763.75550797c-3.02531014 0-5.48660315 2.44005201-5.48660315 5.4394571 0 2.99031469 2.46129301 5.42321223 5.48660315 5.42321223 3.01588722 0 5.46949757-2.43289754 5.46949757-5.42321224 0-2.99940508-2.45361035-5.43945709-5.46949757-5.43945709zM-.00000106-.00000374h4.20287842v15.99999748H-.00000106z"
+              />
+            </svg>
+          </a>
+        </li>
+        <li class="social">
+          <a
+            href="https://www.facebook.com/HumanDefinitely/"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="facebook"
+          >
+            Facebook page for Definitely Human
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+              <path
+                fill="currentColor"
+                d="M9.38879743 15.99951076H6.2593747V9.00057373H3.71476206V6.10407322H6.2593747V3.89757348c0-2.51080135 1.49521038-3.89706424 3.78310767-3.89706424 1.09573625 0 2.24281557.19535412 2.24281557.19535412v2.46446736h-1.26354043c-1.24475638.00125227-1.63296008.77265059-1.63296008 1.5653375v1.878405h2.77878713l-.44455585 2.89650051H9.38879743v6.99893703z"
+              />
+            </svg>
+          </a>
+        </li>
+        <li class="social">
+          <a href="https://www.twitter.com/humandefinitely" rel="noopener noreferrer" target="_blank" title="twitter">
+            Twitter page for Definitely Human
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+              <path
+                fill="currentColor"
+                d="M5.02 14.505c6.042 0 9.345-5.007 9.345-9.345 0-.143 0-.286-.007-.423.641-.463 1.199-1.042 1.642-1.703-.586.259-1.219.436-1.887.518.681-.409 1.199-1.049 1.444-1.819-.633.375-1.335.648-2.084.797-.599-.64-1.451-1.035-2.398-1.035-1.812 0-3.283 1.471-3.283 3.283 0 .259.027.511.089.749-2.732-.136-5.15-1.444-6.771-3.433-.279.484-.442 1.049-.442 1.649 0 1.137.578 2.145 1.464 2.731-.538-.013-1.042-.163-1.485-.408v.04c0 1.594 1.131 2.916 2.636 3.222-.272.075-.565.116-.865.116-.211 0-.415-.02-.62-.061.416 1.307 1.628 2.254 3.065 2.282-1.124.878-2.54 1.403-4.08 1.403-.265 0-.524-.014-.783-.048 1.437.94 3.167 1.485 5.02 1.485"
+              />
+            </svg>
+          </a>
+        </li>
+        <li class="social">
+          <a
+            href="https://www.instagram.com/definitelyhumanproductions/"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="instagram"
+          >
+            Instagram page for Definitely Human
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+              <path
+                fill="currentColor"
+                d="M7.99748821.00505143c-2.17199306 0-2.444336.00920381-3.29735722.04812192-.85123836.03885715-1.43260235.17403434-1.94133394.37174869-.52590492.20438101-.97190887.47784396-1.41651092.922446-.44460204.44460204-.71806498.890606-.922446 1.41651092-.19771435.5086935-.33288391 1.0900651-.37174107 1.94130346C.00917334 5.55819602 0 5.83054658 0 8.0025168c0 2.17196258.00917334 2.44434362.04809906 3.29737246.03885716.85127645.17402672 1.43260997.37174107 1.94133394.20438102.52586683.47784396.97188601.922446 1.41653377.44460205.44457157.890606.71801927 1.41651092.92243838.50873159.19763816 1.09009558.3328763 1.94133394.37165726.85302122.03893335 1.12536416.0481524 3.29735722.0481524 2.17196259 0 2.44434362-.00921905 3.29737246-.0481524.85120027-.03878096 1.43260997-.1740191 1.94125775-.37165726.52594302-.2044191.97196221-.47786681 1.41653378-.92243838.44464776-.44464776.71809546-.89066694.92251457-1.41653377.19763816-.50872397.3328763-1.09005749.37165726-1.94133394.03893335-.85302884.0481524-1.12540988.0481524-3.29737246 0-2.1719702-.00921905-2.44432077-.0481524-3.29733437-.03878096-.85123836-.1740191-1.43260997-.37165726-1.94130346-.2044191-.52590493-.47786681-.97190888-.92251457-1.41651092-.44457157-.44460204-.89059076-.71806499-1.41653378-.922446-.50864778-.19771435-1.09005748-.33289154-1.94125775-.37174869-.85302884-.0389181-1.12540987-.04812192-3.29737246-.04812192zm0 1.44101378c2.13539115 0 2.3883436.00812953 3.23169625.04660573.77973358.03558097 1.20320038.16587434 1.48502904.27536009.37325726.14508195.63969544.31841534.91954314.59825542.2798477.2798401.4531811.54628589.5982478.91955839.10948576.28181342.23977151.7052726.27535247 1.48502141.0384762.84329931.04662859 1.09625177.04662859 3.23165054 0 2.13546733-.00815238 2.38841979-.04662859 3.23169624-.03558096.77973358-.16586671 1.20320038-.27535246 1.48502904-.14506671.37325726-.3184001.63969544-.5982478.91954314-.27984772.27984771-.5462859.4531811-.91954315.59824781-.28182866.10956194-.70529546.2398477-1.48502904.27535247-.84320026.0384762-1.09615272.04662858-3.23169625.04662858-2.135574 0-2.3884655-.00815238-3.23167339-.04662858-.77974881-.03550478-1.203208-.16579053-1.4850138-.27535247-.37330297-.14506671-.63971829-.3184001-.91958885-.5982478-.27984771-.27984771-.4531811-.5462859-.59822495-.91954315-.10952385-.28182866-.2398096-.70529546-.27539818-1.48502904-.0384762-.84327645-.04660573-1.09622891-.04660573-3.23169624 0-2.13539877.00812952-2.38835123.04660573-3.23165054.03558858-.77974881.16587433-1.203208.27539818-1.48502141.14504385-.3732725.31837724-.6397183.59822495-.91955839.27987056-.27984008.54628588-.45317347.91958886-.59825542.2818058-.10948575.70526498-.23977912 1.4850138-.27536009.8432993-.0384762 1.09625176-.04660573 3.23167338-.04660573z"
+              />
+              <path
+                fill="currentColor"
+                d="M7.99748821 10.6683462c-1.47230522 0-2.6658294-1.1935242-2.6658294-2.66582941 0-1.47228999 1.19352418-2.66581417 2.6658294-2.66581417 1.47230523 0 2.6658294 1.19352418 2.6658294 2.66581417 0 1.47230522-1.19352417 2.6658294-2.6658294 2.6658294zm0-6.77262689c-2.26814547 0-4.10682033 1.83866724-4.10682033 4.10679748 0 2.26819118 1.83867486 4.10682033 4.10682033 4.10682033 2.268115 0 4.10682033-1.83862915 4.10682033-4.10682033 0-2.26813024-1.83870533-4.10679748-4.10682033-4.10679748z"
+              />
+              <path
+                fill="currentColor"
+                d="M13.22628985 3.73346402c0 .53003446-.42971442.9596803-.95969554.9596803-.5300573 0-.95969554-.42964584-.95969554-.9596803 0-.53003445.42963823-.9596803.95969554-.9596803.52998112 0 .95969554.42964585.95969554.9596803z"
+              />
+            </svg>
+          </a>
+        </li>
+      </ul>
+      <p class="copyright">© 2019 Definitely Human. All rights reserved.</p>
+    </footer>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js", {
+          scope: "/",
+          updateViaCache: "none"
+        });
+      }
+    </script>
+  </body>
+</html>
