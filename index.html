@@ -4,28 +4,41 @@
     <meta charset="utf-8" />
     <meta name="description" content="Podcasts by Definitely Human." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Definitely Human</title>
+
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
-    <link rel="canonical" href="https://definitely-human.jmclerck.now.sh" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/icons/favicon-16x16.png"
+    />
+    <link rel="canonical" href="https://definitely-human.jmclerck.vercel.app" />
     <link rel="manifest" href="/icons/site.webmanifest" />
     <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5bbad5" />
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#2196f3" />
+
     <style>
-      @keyframes float {
+      @keyframes orbit {
         from {
-          transform: rotate(0deg) translate(-5px) rotate(0deg);
+          transform: translate(5px) rotate(0turn) translate(-5px) rotate(0turn);
         }
         to {
-          transform: rotate(360deg) translate(-5px) rotate(-360deg);
+          transform: translate(5px) rotate(1turn) translate(-5px) rotate(-1turn);
         }
       }
       :root {
+        --color-outline: #dc5742;
         --color-primary: #f0f0f0;
         --color-secondary: #263238;
-        --color-outline: #dc5742;
         --color-down: #251720;
         --color-iwgbrp: #dbcc83;
         --color-mars-corp: #574645;
@@ -35,22 +48,31 @@
         --color-the-monster-hunters: #65253c;
       }
       :focus {
-        outline: none
+        outline: none;
       }
       body {
         background-color: var(--color-primary);
         color: var(--color-secondary);
-        font-family: system-ui;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
       }
       h1 {
         text-align: center;
       }
+      img {
+        width: 100%;
+        height: auto;
+      }
       .podcasts {
+        align-items: start;
         display: grid;
-        display: -ms-grid;
-        gap: 0 5rem;
-        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+        gap: 0 2.5rem;
+        grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
+        justify-content: center;
         list-style: none;
+        margin: 2.5rem;
+        padding: unset;
       }
       .podcast:hover .bubble,
       .podcast:hover .title {
@@ -66,34 +88,32 @@
         color: unset;
       }
       .podcast .bubble {
-        border-radius: 12.5%;
+        border-radius: 10% 10% 10% 10% / 10% 10% 10% 10%;
         display: block;
-        height: 20rem;
         overflow: hidden;
         margin: 0 auto;
         transition-duration: 0.15s;
         transition-property: filter;
         transition-timing-function: linear;
-        transform: translate(-5px);
-        width: 20rem;
       }
       .podcast .title {
+        display: block;
         font-size: 0.78em;
         font-weight: 500;
         letter-spacing: 0.3em;
         margin: 2rem auto;
+        max-width: 15rem;
         text-align: center;
         text-transform: uppercase;
         transition-duration: 0.15s;
         transition-property: color;
         transition-timing-function: linear;
-        width: 15rem;
       }
       @media (prefers-color-scheme: dark) {
         :root {
+          --color-outline: #68c5ab;
           --color-primary: #263238;
           --color-secondary: #f0f0f0;
-          --color-outline: #68c5ab;
         }
         :focus {
           outline-color: var(--color-outline);
@@ -105,9 +125,9 @@
       @media (prefers-reduced-motion: no-preference) {
         .podcast:hover .bubble {
           animation-delay: 0s;
-          animation-duration: 15s;
+          animation-duration: 3s;
           animation-iteration-count: infinite;
-          animation-name: float;
+          animation-name: orbit;
           animation-play-state: running;
           animation-timing-function: linear;
           will-change: transform;
@@ -120,7 +140,7 @@
         }
       }
     </style>
-      
+
     <style>
       footer {
         grid-column: span 3;
@@ -205,7 +225,9 @@
       }
       [data-podcast-title="the-monster-hunters"]:focus-within .bubble,
       [data-podcast-title="the-monster-hunters"]:hover .bubble {
-        filter: drop-shadow(0.5rem 0.5rem 0.5rem var(--color-the-monster-hunters));
+        filter: drop-shadow(
+          0.5rem 0.5rem 0.5rem var(--color-the-monster-hunters)
+        );
         will-change: filter;
       }
       [data-podcast-title="the-monster-hunters"]:focus-within .title,
@@ -230,133 +252,147 @@
       </header>
       <ul class="podcasts">
         <li class="podcast" data-podcast-title="iwgbrp">
-          <a href="/iwgbrp">
-            <picture class="bubble">
-              <source type="image/webp" srcset="images/iwgbrp.webp" />
-              <img
-                loading="lazy"
-                height="320"
-                width="320"
-                srcset="images/iwgbrp-320w.jpeg, images/iwgbrp-640w.jpeg 2x, images/iwgbrp-960w.jpeg 3x"
-                src="images/iwgbrp-320w.jpeg"
-                alt="The International Worldwide Global Biscuit Review Podcast Cover Art"
-              />
-            </picture>
-            <p class="title">
-              The International Worldwide Global Biscuit Review Podcast
-            </p>
+          <picture class="bubble">
+            <source type="image/webp" srcset="images/iwgbrp.webp" />
+            <img
+              loading="lazy"
+              height="320"
+              width="320"
+              srcset="
+                images/iwgbrp-320w.jpeg,
+                images/iwgbrp-640w.jpeg 2x,
+                images/iwgbrp-960w.jpeg 3x
+              "
+              src="images/iwgbrp-320w.jpeg"
+              alt="The International Worldwide Global Biscuit Review Podcast Cover Art"
+            />
+          </picture>
+          <a class="title" href="/iwgbrp">
+            The International Worldwide Global Biscuit Review Podcast
           </a>
         </li>
         <li class="podcast" data-podcast-title="the-bunker">
-          <a href="/the-bunker">
-            <picture class="bubble">
-              <source type="image/webp" srcset="images/the-bunker.webp" />
-              <img
-                loading="lazy"
-                height="320"
-                width="320"
-                srcset="images/the-bunker-320w.jpeg, images/the-bunker-640w.jpeg 2x, images/the-bunker-960w.jpeg 3x"
-                src="images/the-bunker-320w.jpeg"
-                alt="The Bunker Podcast Cover Art"
-              />
-            </picture>
-            <p class="title">The Bunker</p>
-          </a>
+          <picture class="bubble">
+            <source type="image/webp" srcset="images/the-bunker.webp" />
+            <img
+              loading="lazy"
+              height="320"
+              width="320"
+              srcset="
+                images/the-bunker-320w.jpeg,
+                images/the-bunker-640w.jpeg 2x,
+                images/the-bunker-960w.jpeg 3x
+              "
+              src="images/the-bunker-320w.jpeg"
+              alt="The Bunker Podcast Cover Art"
+            />
+          </picture>
+          <a class="title" href="/the-bunker">The Bunker</a>
         </li>
         <li class="podcast" data-podcast-title="the-infinite-bad">
-          <a href="/the-infinite-bad">
-            <picture class="bubble">
-              <source type="image/webp" srcset="images/the-infinite-bad.webp" />
-              <img
-                loading="lazy"
-                height="320"
-                width="320"
-                srcset="
-                  images/the-infinite-bad-320w.jpeg,
-                  images/the-infinite-bad-640w.jpeg 2x,
-                  images/the-infinite-bad-960w.jpeg 3x
-                "
-                src="images/the-infinite-bad-320w.jpeg"
-                alt="The Infinite Bad Podcast Cover Art"
-              />
-            </picture>
-            <p class="title">The Infinite Bad</p>
-          </a>
+          <picture class="bubble">
+            <source type="image/webp" srcset="images/the-infinite-bad.webp" />
+            <img
+              loading="lazy"
+              height="320"
+              width="320"
+              srcset="
+                images/the-infinite-bad-320w.jpeg,
+                images/the-infinite-bad-640w.jpeg 2x,
+                images/the-infinite-bad-960w.jpeg 3x
+              "
+              src="images/the-infinite-bad-320w.jpeg"
+              alt="The Infinite Bad Podcast Cover Art"
+            />
+          </picture>
+          <a class="title" href="/the-infinite-bad">The Infinite Bad</a>
         </li>
         <li class="podcast" data-podcast-title="mars-corp">
-          <a href="/mars-corp">
-            <picture class="bubble">
-              <source type="image/webp" srcset="images/mars-corp.webp" />
-              <img
-                loading="lazy"
-                height="320"
-                width="320"
-                srcset="images/mars-corp-320w.jpeg, images/mars-corp-640w.jpeg 2x, images/mars-corp-960w.jpeg 3x"
-                src="images/mars-corp-320w.jpeg"
-                alt="Mars Corp Podcast Cover Art"
-              />
-            </picture>
-            <p class="title">Mars Corp</p>
-          </a>
+          <picture class="bubble">
+            <source type="image/webp" srcset="images/mars-corp.webp" />
+            <img
+              loading="lazy"
+              height="320"
+              width="320"
+              srcset="
+                images/mars-corp-320w.jpeg,
+                images/mars-corp-640w.jpeg 2x,
+                images/mars-corp-960w.jpeg 3x
+              "
+              src="images/mars-corp-320w.jpeg"
+              alt="Mars Corp Podcast Cover Art"
+            />
+          </picture>
+          <a class="title" href="/mars-corp">Mars Corp</a>
         </li>
         <li class="podcast" data-podcast-title="the-monster-hunters">
-          <a href="/the-monster-hunters">
-            <picture class="bubble">
-              <source type="image/webp" srcset="images/the-monster-hunters.webp" />
-              <img
-                loading="lazy"
-                height="320"
-                width="320"
-                srcset="
-                  images/the-monster-hunters-320w.jpeg,
-                  images/the-monster-hunters-640w.jpeg 2x,
-                  images/the-monster-hunters-960w.jpeg 3x
-                "
-                src="images/the-monster-hunters-320w.jpeg"
-                alt="The Monster Hunters Podcast Cover Art"
-              />
-            </picture>
-            <p class="title">The Monster Hunters</p>
-          </a>
+          <picture class="bubble">
+            <source
+              type="image/webp"
+              srcset="images/the-monster-hunters.webp"
+            />
+            <img
+              loading="lazy"
+              height="320"
+              width="320"
+              srcset="
+                images/the-monster-hunters-320w.jpeg,
+                images/the-monster-hunters-640w.jpeg 2x,
+                images/the-monster-hunters-960w.jpeg 3x
+              "
+              src="images/the-monster-hunters-320w.jpeg"
+              alt="The Monster Hunters Podcast Cover Art"
+            />
+          </picture>
+          <a class="title" href="/the-monster-hunters">The Monster Hunters</a>
         </li>
         <li class="podcast" data-podcast-title="pax-fortuna">
-          <a href="/pax-fortuna">
-            <picture class="bubble">
-              <source type="image/webp" srcset="images/pax-fortuna.webp" />
-              <img
-                loading="lazy"
-                height="320"
-                width="320"
-                srcset="images/pax-fortuna-320w.jpeg, images/pax-fortuna-640w.jpeg 2x, images/pax-fortuna-960w.jpeg 3x"
-                src="images/pax-fortuna-320w.jpeg"
-                alt="Pax Fortuna Podcast Cover Art"
-              />
-            </picture>
-            <p class="title">Pax Fortuna</p>
-          </a>
+          <picture class="bubble">
+            <source type="image/webp" srcset="images/pax-fortuna.webp" />
+            <img
+              loading="lazy"
+              height="320"
+              width="320"
+              srcset="
+                images/pax-fortuna-320w.jpeg,
+                images/pax-fortuna-640w.jpeg 2x,
+                images/pax-fortuna-960w.jpeg 3x
+              "
+              src="images/pax-fortuna-320w.jpeg"
+              alt="Pax Fortuna Podcast Cover Art"
+            />
+          </picture>
+          <a class="title" href="/pax-fortuna">Pax Fortuna</a>
         </li>
         <li class="podcast" data-podcast-title="down">
-          <a href="/down">
-            <picture class="bubble">
-              <source type="image/webp" srcset="images/down.webp" />
-              <img
-                loading="lazy"
-                height="320"
-                width="320"
-                srcset="images/down-320w.jpeg, images/down-640w.jpeg 2x, images/down-960w.jpeg 3x"
-                src="images/down-320w.jpeg"
-                alt="Down Podcast Cover Art"
-              />
-            </picture>
-            <p class="title">Down</p>
-          </a>
+          <picture class="bubble">
+            <source type="image/webp" srcset="images/down.webp" />
+            <img
+              loading="lazy"
+              height="320"
+              width="320"
+              srcset="
+                images/down-320w.jpeg,
+                images/down-640w.jpeg 2x,
+                images/down-960w.jpeg 3x
+              "
+              src="images/down-320w.jpeg"
+              alt="Down Podcast Cover Art"
+            />
+          </picture>
+          <a class="title" href="/down">Down</a>
         </li>
       </ul>
     </main>
     <footer>
       <ul class="socials">
         <li class="social">
-          <a href="https://patreon.com/definitelyhuman" rel="noopener noreferrer" target="_blank" title="patreon">
+          <a
+            href="https://patreon.com/definitelyhuman"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="patreon"
+          >
             Patreon page for Definitely Human
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
               <path
@@ -383,7 +419,12 @@
           </a>
         </li>
         <li class="social">
-          <a href="https://www.twitter.com/humandefinitely" rel="noopener noreferrer" target="_blank" title="twitter">
+          <a
+            href="https://www.twitter.com/humandefinitely"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="twitter"
+          >
             Twitter page for Definitely Human
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
               <path
@@ -424,7 +465,7 @@
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("sw.js", {
           scope: "/",
-          updateViaCache: "none"
+          updateViaCache: "none",
         });
       }
     </script>
